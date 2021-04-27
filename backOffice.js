@@ -1,3 +1,5 @@
+const url = 'https://striveschool-api.herokuapp.com/api/movies/';
+
 const addNewData = document.querySelector('#addNewData');
 
 function enableform() {
@@ -20,6 +22,7 @@ const getData = () => {
 };
 
 const submit = document.querySelector('#submit');
+const showMovies = document.querySelector('#showMovies');
 
 const addMovies = async (event) => {
 	event.preventDefault();
@@ -37,5 +40,23 @@ const addMovies = async (event) => {
 	);
 	if (resp.ok) {
 		alert('Data has been successfully addedd!!');
+	}
+};
+const getCategories = async (event) => {
+	try {
+		const response = await fetch(
+			'https://striveschool-api.herokuapp.com/api/movies',
+			{
+				headers: {
+					Authorization:
+						'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgwMDZhMGIxZjBmYjAwMTVkOTE2ZmIiLCJpYXQiOjE2MTkwMDMwNDEsImV4cCI6MTYyMDIxMjY0MX0.BUjunefP1cqV1viZCRo9wZf_AWri7aeJAYeJILezuJA',
+					'Content-Type': 'application/json',
+				},
+			}
+		);
+		const categories = await response.json();
+		console.log(categories);
+	} catch (error) {
+		window.alert(error);
 	}
 };
